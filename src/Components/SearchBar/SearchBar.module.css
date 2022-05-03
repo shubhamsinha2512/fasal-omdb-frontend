@@ -1,7 +1,11 @@
 .searchbar_container{
-
-}
+    margin: 25px auto;
+}   
 
 .searchbar_input{
-    
+}
+
+.searchbar_input:hover{
+    height: 40px !important;
+    box-shadow: 2px 4px 10px #ddd;
 }

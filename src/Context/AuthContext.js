@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 // import { BASE_URL, ME } from '../utils/API';
 
 export const AuthContext = React.createContext({
@@ -30,7 +30,7 @@ export const AuthContextProvider = (props) => {
     const contextValue = {
         user: user,
         token: token,
-        isLoggedIn: userLoggedIn,
+        isLoggedIn: true,
         login: loginHandler,
         logout: logoutHandler
     };
