@@ -9,7 +9,7 @@ function SearchResult() {
 
     if(searchResult == null){
 
-        return <></>
+        return <></>    //don't show search result
 
     }else if(searchResult === 'not found'){
         return (
