@@ -1,0 +1,7 @@
+.img-cover {
+    height: 200px !important;
+  }
+
+  .movie-card:hover{
+      box-shadow: 2px 4px 15px #aaa;
+  }

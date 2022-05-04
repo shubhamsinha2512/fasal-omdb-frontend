@@ -21,7 +21,7 @@ function SearchResult() {
         )
     }else{
         return (
-          <div>
+          <div onClick={()=>MovieCtx.setCurrentMovie(searchResult)}>
               <Card>
                   <Card.Header className='bg-primary text-white'>Search Result</Card.Header>
                   <Card.Body>

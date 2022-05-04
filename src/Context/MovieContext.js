@@ -4,10 +4,12 @@ import APP_API from '../utils/APP_API';
 
 export const MovieContext = React.createContext({
     searchResult: null,
+    currentMovie: null,
     movieLists: [],
     addMovieToList: (movie, list) => { },
     getMovieLists: () => { },
-    handleSearchResult: () => { }
+    handleSearchResult: () => { },
+    setCurrentMovie: () => {}
 })
 
 export const MovieContextProvider = (props) => {
@@ -15,7 +17,8 @@ export const MovieContextProvider = (props) => {
     const AuthCtx = useContext(AuthContext);
 
     const [movieLists, setMovieLists] = useState([]);
-    const [searchResult, setSearchResult] = useState(null)
+    const [currentMovie, setCurrentMovie] = useState(null);
+    const [searchResult, setSearchResult] = useState(null);
 
 
     const addMovieToList = async () => {
@@ -45,13 +48,16 @@ export const MovieContextProvider = (props) => {
         movieLists: movieLists,
         addMovieToList: addMovieToList,
         getMovieLists: getMovieLists,
-        handleSearchResult: handleSearchResult
+        handleSearchResult: handleSearchResult,
+        setCurrentMovie : setCurrentMovie
     };
 
 
     useEffect(()=>{
-        getMovieLists()
-    }, [])
+        if(AuthCtx.token){
+            getMovieLists()
+        }
+    }, [AuthCtx.token])
 
     return <MovieContext.Provider value={contextValue}>
         {props.children}
