@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { Button, Container, Navbar } from 'react-bootstrap'
 import { AuthContext } from '../../Context/AuthContext'
+import {Link} from 'react-router-dom'
 
 import './Nav.css'
 
-function Nav({setListModalShow}) {
+function Nav({ setListModalShow }) {
 
   const AuthCtx = useContext(AuthContext);
 
@@ -14,14 +15,14 @@ function Nav({setListModalShow}) {
         <Navbar.Brand href='/'>
           <h1>OMDB APP</h1>
         </Navbar.Brand>
-        {AuthCtx.isLoggedIn &&
+        {AuthCtx.isLoggedIn ?
           <div>
             <h4>{AuthCtx.user && AuthCtx.user.name}</h4>
 
             <Container className='my-2'>
               <Button
                 className='mx-2'
-                onClick={()=>setListModalShow(true)}
+                onClick={() => setListModalShow(true)}
               >
                 Create New List
               </Button>
@@ -34,9 +35,27 @@ function Nav({setListModalShow}) {
             </Container>
 
           </div>
+          :
+          <div>
+            <Link to='/login'>
+              <Button
+                className='mx-2'
+                variant='primary'
+              >Login
+              </Button>
+          </Link>
+
+          <Link to='/signup'>
+              <Button
+                className='mx-2'
+                variant='primary'
+              >Signup
+              </Button>
+          </Link>
+          </div>
         }
-      </Container>
-    </Navbar>
+    </Container>
+    </Navbar >
   )
 }
 

@@ -16,13 +16,10 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          {isLoggedIn ? 
             <Route path='/' exact element={<Dashboard />} />
-            :
-            <Route path='/' exact element={<Login />} />
-          }
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
+            {!isLoggedIn && <Route path='/login' element={<Login />} />}
+            {!isLoggedIn && <Route path='/signup' element={<Signup />} />}
+            <Route path='*' element={<Dashboard />} />
         </Routes>
       </Router>
     </div>

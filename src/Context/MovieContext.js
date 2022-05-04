@@ -60,13 +60,16 @@ export const MovieContextProvider = (props) => {
     
 
     const getMovieLists = async () => {
-        let res = await (await fetch(APP_API.MOVIE_LIST,{
+        let res = AuthCtx.token ? await (await fetch(APP_API.MOVIE_LIST,{
             method:'GET',
-            headers: {
-                'Authorization': `Bearer ${AuthCtx.token}`
-            }
+            headers: {'Authorization': `Bearer ${AuthCtx.token}`}
         })).json()
+        :
+        await (await fetch(APP_API.MOVIE_LIST,{
+            method:'GET',
+        })).json();
 
+        console.log(res)
         if(res.status === 'success'){
             setMovieLists(res.data.movieLists)
             setAvailableLists(res.data.movieLists.map(m => {
@@ -101,10 +104,8 @@ export const MovieContextProvider = (props) => {
 
 
     useEffect(()=>{
-        if(AuthCtx.token){
             getMovieLists()
-        }
-    }, [AuthCtx.token])
+    }, [AuthCtx.token, AuthCtx.isLoggedIn])
 
     return <MovieContext.Provider value={contextValue}>
         {props.children}
