@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
 import {Form, Button, Card, Container} from 'react-bootstrap'
-import Nav from '../Components/Nav';
+import Nav from '../Components/Nav/Nav';
 
 import { AuthContext } from '../Context/AuthContext';
 import { SIGNUP } from '../utils/APP_API';

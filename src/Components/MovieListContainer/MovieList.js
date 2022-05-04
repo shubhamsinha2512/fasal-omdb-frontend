@@ -3,14 +3,15 @@ import { Card, Container, Row } from 'react-bootstrap'
 
 import {BsGlobe, BsLockFill} from 'react-icons/bs'
 import Movie from '../Movie/Movie';
+import './MovieList.css'
 
 function MovieList({list}) {
 
     const {listName, movies} = list && list;
 
   return (
-    <Card className='my-4'>
-        <Card.Header className={`${list.private ? 'bg-danger':'bg-success'} text-white`}>
+    <Card className='my-4 movielist_shadow'>
+        <Card.Header className={`${list.private ? 'bg-danger':'bg-info'} text-white`}>
 
             <div className='d-flex justify-content-between'>
                 <h4>{listName}</h4>

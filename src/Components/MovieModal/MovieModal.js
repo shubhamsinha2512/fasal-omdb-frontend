@@ -33,7 +33,7 @@ function MovieModal() {
                 show={show}
                 onHide={handleHide}
             >
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='bg-dark text-white'>
                     <Modal.Title id="contained-modal-title-vcenter">
                         {currentMovie.Title}
                     </Modal.Title>
@@ -62,7 +62,7 @@ function MovieModal() {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleHide}>Close</Button>
+                    <Button variant="danger" onClick={handleHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
         )

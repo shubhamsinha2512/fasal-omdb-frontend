@@ -7,6 +7,7 @@ export const MovieContext = React.createContext({
     currentMovie: null,
     movieLists: [],
     availableLists: [],
+    createNewList: () => {},
     addMovieToList: (movie, list) => { },
     getMovieLists: () => { },
     handleSearchResult: () => { },
@@ -22,6 +23,23 @@ export const MovieContextProvider = (props) => {
     const [currentMovie, setCurrentMovie] = useState(null);
     const [searchResult, setSearchResult] = useState(null);
 
+    const createNewList = async (listName, listType) => {
+        let res = await (await fetch(APP_API.MOVIE_LIST,{
+            method:'POST',
+            headers: {
+                'Authorization': `Bearer ${AuthCtx.token}`,
+                'Content-Type':'application/json'
+            },
+            'body': JSON.stringify({
+                listName: listName,
+                private: listType
+            })
+        })).json()
+
+        if(res.status === 'success'){
+            getMovieLists()
+        }
+    }
 
     const addMovieToList = async (listId, movie) => {
         let res = await (await fetch(APP_API.MOVIE_LIST+`/${listId}`,{
@@ -39,6 +57,7 @@ export const MovieContextProvider = (props) => {
             getMovieLists()
         }
     }
+    
 
     const getMovieLists = async () => {
         let res = await (await fetch(APP_API.MOVIE_LIST,{
@@ -73,6 +92,7 @@ export const MovieContextProvider = (props) => {
         currentMovie: currentMovie,
         movieLists: movieLists,
         availableLists: availableLists,
+        createNewList:createNewList,
         addMovieToList: addMovieToList,
         getMovieLists: getMovieLists,
         handleSearchResult: handleSearchResult,

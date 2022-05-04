@@ -7,7 +7,7 @@ import { BASE_URL, LOGIN } from '../utils/APP_API';
 //Auth
 import { AuthContext } from '../Context/AuthContext';
 import { Link } from 'react-router-dom';
-import Nav from '../Components/Nav';
+import Nav from '../Components/Nav/Nav';
 
 function Login() {
 

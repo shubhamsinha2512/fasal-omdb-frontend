@@ -11,6 +11,8 @@ function SearchResult() {
     const [selectedList, setSelectedList] = useState({listName:'Select List'})
 
     const handleListChange = e => {
+        e.stopPropagation();
+        
         let selectObj = availableLists.find(l => l.listId == e)
         setSelectedList(selectObj)
     }

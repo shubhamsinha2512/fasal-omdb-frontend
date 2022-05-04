@@ -1,15 +1,11 @@
-import { Dropdown } from 'bootstrap';
-import { Button } from 'bootstrap';
-import { Modal } from 'bootstrap';
 import React, { useContext, useState } from 'react'
-import { Col, DropdownButton, InputGroup, Row } from 'react-bootstrap';
+import { Col, DropdownButton, Form, InputGroup, Row, Dropdown, Button, Modal } from 'react-bootstrap';
 import { MovieContext } from '../../Context/MovieContext';
 
-function ListModal() {
+function ListModal({ show, setShow }) {
 
     const MovieCtx = useContext(MovieContext);
 
-    const [show, setShow] = useState(false);
     const [listName, setListName] = useState('');
     const [listType, setListType] = useState('Public');
 
@@ -30,7 +26,9 @@ function ListModal() {
     }
 
     const handleSubmit = e => {
-
+        let prvt = listType == 'Private' ? true : false;
+        MovieCtx.createNewList(listName, prvt)
+        handleHide()
     }
 
     return (
@@ -41,7 +39,7 @@ function ListModal() {
             show={show}
             onHide={handleHide}
         >
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className='bg-dark text-white'>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Add New List
                 </Modal.Title>
@@ -50,18 +48,16 @@ function ListModal() {
             <Modal.Body>
 
                 <Row className='d-flex flex-wrap'>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>ListName</Form.Label>
-                        <Form.Control 
-                            type="email" 
-                            placeholder="Enter List Name" 
-                            name="listName" 
-                            value={listName} 
-                            onChange={handleListNameChange} 
-                            />
-                    </Form.Group>
+                    <Form.Label>ListName</Form.Label>
 
                     <InputGroup>
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter List Name"
+                            name="listName"
+                            value={listName}
+                            onChange={handleListNameChange}
+                        />
                         <DropdownButton
                             variant="outline-secondary"
                             title={listType}
@@ -84,7 +80,7 @@ function ListModal() {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={handleHide}>Close</Button>
+                <Button variant="danger" onClick={handleHide}>Cancel</Button>
             </Modal.Footer>
         </Modal>
     )
