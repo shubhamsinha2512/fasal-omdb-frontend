@@ -70,7 +70,7 @@ function Signup() {
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="email" placeholder="Enter Name" name="name" value={signupInfo.name} onChange={handleChange} />
+                <Form.Control type="text" placeholder="Enter Name" name="name" value={signupInfo.name} onChange={handleChange} />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -86,7 +86,7 @@ function Signup() {
                 <Form.Control type="password" placeholder="Password" name="password" value={signupInfo.password} onChange={handleChange} />
               </Form.Group>
 
-              <p>Already have an account? <Link to='/signup'>Login</Link></p>
+              <p>Already have an account? <Link to='/login'>Login</Link></p>
               <Button variant="primary" type="submit">
                 Signup
               </Button>
