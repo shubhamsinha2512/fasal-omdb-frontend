@@ -12,15 +12,24 @@ function Nav() {
         <Navbar.Brand href='/'>
           <h1>OMDB APP</h1>
         </Navbar.Brand>
-        {AuthCtx.isLoggedIn && 
+        {AuthCtx.isLoggedIn &&
           <div>
             <h4>{AuthCtx.user && AuthCtx.user.name}</h4>
-            <Button
-              variant='danger'
-              onClick={AuthCtx.logout}
-            >Logout</Button>
+
+            <Container className='my-2'>
+              <Button
+                className='mx-2'
+              >Create New List</Button>
+
+              <Button
+                className='mx-2'
+                variant='danger'
+                onClick={AuthCtx.logout}
+              >Logout</Button>
+            </Container>
+
           </div>
-          }
+        }
       </Container>
     </Navbar>
   )

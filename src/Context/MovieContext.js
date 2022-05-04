@@ -6,10 +6,11 @@ export const MovieContext = React.createContext({
     searchResult: null,
     currentMovie: null,
     movieLists: [],
+    availableLists: [],
     addMovieToList: (movie, list) => { },
     getMovieLists: () => { },
     handleSearchResult: () => { },
-    setCurrentMovie: () => {}
+    handleCurrentMovie: () => {}
 })
 
 export const MovieContextProvider = (props) => {
@@ -17,12 +18,26 @@ export const MovieContextProvider = (props) => {
     const AuthCtx = useContext(AuthContext);
 
     const [movieLists, setMovieLists] = useState([]);
+    const [availableLists, setAvailableLists] = useState([]);
     const [currentMovie, setCurrentMovie] = useState(null);
     const [searchResult, setSearchResult] = useState(null);
 
 
-    const addMovieToList = async () => {
+    const addMovieToList = async (listId, movie) => {
+        let res = await (await fetch(APP_API.MOVIE_LIST+`/${listId}`,{
+            method:'PATCH',
+            headers: {
+                'Authorization': `Bearer ${AuthCtx.token}`,
+                'Content-Type':'application/json'
+            },
+            'body': JSON.stringify({
+                "movies" : [{...movie}]
+            })
+        })).json()
 
+        if(res.status === 'success'){
+            getMovieLists()
+        }
     }
 
     const getMovieLists = async () => {
@@ -35,7 +50,13 @@ export const MovieContextProvider = (props) => {
 
         if(res.status === 'success'){
             setMovieLists(res.data.movieLists)
-            console.log(res.data.movieLists)
+            setAvailableLists(res.data.movieLists.map(m => {
+                return {
+                    listId: m._id,
+                    listName: m.listName
+                }
+            }))
+            // console.log(res.data.movieLists)
         }
     }
 
@@ -43,13 +64,19 @@ export const MovieContextProvider = (props) => {
         setSearchResult(result)
     }
 
+    const handleCurrentMovie = (movie) => {
+        setCurrentMovie(movie)
+    }
+
     const contextValue = {
         searchResult: searchResult,
+        currentMovie: currentMovie,
         movieLists: movieLists,
+        availableLists: availableLists,
         addMovieToList: addMovieToList,
         getMovieLists: getMovieLists,
         handleSearchResult: handleSearchResult,
-        setCurrentMovie : setCurrentMovie
+        handleCurrentMovie : handleCurrentMovie
     };
 
 

@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import {Card, Row} from 'react-bootstrap'
 import { MovieContext } from '../../Context/MovieContext'
 
-import './Movie.css'
+import styles from './Movie.module.css'
 
 function Movie({movie}) {
 
   const MovieCtx = useContext(MovieContext)
 
   const handleClick = e => {
-    MovieCtx.setCurrentMovie(movie)
+    MovieCtx.handleCurrentMovie(movie)
   }
 
   if(movie && movie != undefined){
@@ -20,10 +20,10 @@ function Movie({movie}) {
         key={movie._id}
         text={'white'}
         style={{ width: '18rem' }}
-        className="m-4 movie-card"
+        className={`m-4 ${styles.movie_card}`}
         onClick={handleClick}
       >
-        <Card.Img className='img-cover' variant="top" src={`${movie.Poster}`} />
+        <Card.Img className={styles.img_cover} variant="top" src={`${movie.Poster}`} />
         <Card.Header><h5>{movie.Title}</h5></Card.Header>
   
         <Card.Body className='p-4'>

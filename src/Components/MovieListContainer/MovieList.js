@@ -21,12 +21,15 @@ function MovieList({list}) {
         </Card.Header>
 
         <Card.Body className='d-flex justify-content-start'>
-            {movies && movies.length != 0 && movies.map((movie, i)=>
+            {movies && movies.length != 0 ? movies.map((movie, i)=>
                 <Movie
                     key={movie._id} 
                     movie={movie}
                 />
-            )}
+            )
+            :
+            <h3>No Movies Added Yet! Add Some...</h3>
+        }
         </Card.Body>
     </Card>
   )
